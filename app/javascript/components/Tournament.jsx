@@ -48,7 +48,7 @@ class Tournament extends React.Component {
           </li>
         ));
     }
-    const tournamentInstruction = this.addHtmlEntities(tournament.instruction);
+    const tournamentDescription = this.addHtmlEntities(tournament.description);
 
     return (
       <div className="">
@@ -72,10 +72,10 @@ class Tournament extends React.Component {
               </ul>
             </div>
             <div className="col-sm-12 col-lg-7">
-              <h5 className="mb-2">Tournament Instructions</h5>
+              <h5 className="mb-2">Tournament description</h5>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: `${tournamentInstruction}`
+                  __html: `${tournamentDescription}`
                 }}
               />
             </div>
