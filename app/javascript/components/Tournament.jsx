@@ -5,8 +5,8 @@ class Tournament extends React.Component {
   constructor(props) {
     super(props);
     this.state = { tournament: { team: "" } };
-
     this.addHtmlEntities = this.addHtmlEntities.bind(this);
+    this.deleteTournament = this.deleteTournament.bind(this);
   }
 
   componentDidMount() {
@@ -34,6 +34,33 @@ class Tournament extends React.Component {
       .replace(/&lt;/g, "<")
       .replace(/&gt;/g, ">");
   }
+
+  deleteTournament() {
+    const {
+      match: {
+        params: { id }
+      }
+    } = this.props;
+    const url = `/api/v1/destroy/${id}`;
+    const token = document.querySelector('meta[name="csrf-token"]').content;
+
+    fetch(url, {
+      method: "DELETE",
+      headers: {
+        "X-CSRF-Token": token,
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response was not ok.");
+      })
+      .then(() => this.props.history.push("/tournaments"))
+      .catch(error => console.log(error.message));
+  }
+
 
   render() {
     const { tournament: tournament } = this.state;
@@ -80,7 +107,7 @@ class Tournament extends React.Component {
               />
             </div>
             <div className="col-sm-12 col-lg-2">
-              <button type="button" className="btn btn-danger">
+              <button type="button" className="btn btn-danger" onClick={this.deleteTournament}>
                 Delete Tournament
               </button>
             </div>
