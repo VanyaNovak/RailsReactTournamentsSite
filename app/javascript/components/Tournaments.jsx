@@ -43,7 +43,7 @@ class Tournaments extends React.Component {
     const noTournament = (
       <div className="vw-100 vh-50 d-flex align-items-center justify-content-center">
         <h4>
-          No tournaments yet. Why not <Link to="/new_tournament">create one</Link>
+          No tournaments yet. Why not <Link to="/tournament">create one</Link>
         </h4>
       </div>
     );
